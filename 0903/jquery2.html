@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <!-- 제이쿼리 연결주소가 틀리면 $ is not defined -->
+    <script>
+        $(document).ready(function () {
+
+            $("#list1 li:odd").css("background", "yellow");
+            //id가 list1인 요소에 li요소중 홀수 인텍스만 선택후 배경 노란색 (첫번째가 0)
+            //$("#list1 li:nth-child(even)") 과 같은 결과가 나온다. 첫번재가 1
+
+            $("#list1 li:even").css("background", "gray");
+            // 2.id="list1"인 요소에 <li> 요소중   짝수 인덱스만 선택후 배경색상 적용
+            // $("#list1 li:nth-child(odd)")
+
+            $("#list1 li:first").css("color", "red");
+            // id="list1"인 요소에 <li> 요소중   첫번째 <li>요소만 선택후 폰트색상 적용
+            $("#list1 li:last").css("color", "green");
+            // id="list1"인 요소에 <li> 요소중  마지막번째 <li>요소만 선택후 폰트색상 적용
+
+            $('#list1 li').eq(1).css('font-style', 'italic');
+            // eq(1)-equal 인덱스 번호가 1번과 같은(인덱스번호는 0,1,2,3,4.. )   
+            // $('#list1 li:eq(1)')
+            $('#list1 li:lt(2)').css("border", "dotted 2px aqua");
+            // index 번호 2번보다 작은 lt-lessthen 즉 인덱스번호 0,1에 하늘색 점선
+
+            $("#list1 li:gt(2)").css("border", "dotted 2px purple");
+            // index 번호 2번보다 큰 gt-greatethen 즉인덱스 번 3,4,5....
+
+            $("#list2 li:nth-child(2n)").css("background", "orange");
+            // id="list2"인 요소에 <li> 요소중  2의 배수번째 요소만 선택(인덱스와 상관 없음)
+            // $("#list2 li:nth-child(even)") - css 선택자로 짝수 요소   
+
+            $("#list2 li:contains('리스트11')").css("color", "red");
+            // li중 '리스트11' 이라는 글자가 포함된 li요소 만 선택
+
+            $("#list2 li:has('span')").css("color", "aqua");
+            // 10. id="list2"인 요소에 <li> 요소중  태그 <span>이 포함된 <li>요소만 선택
+
+            $("#list2 li").filter(".theObj").css('font-size', '20px');
+            // 11. id="list2"인 요소에 <li> 요소중  class="theObj"인 <li>요소만 선택
+
+            $("#list2 li").find("a").css("background-color", "red"); //중요 
+            // 12. id="list2"인 요소에 <li> 요소중에 하위요소 <a>요소만 선택 
+
+            $(".theTitle").html("<a href='#'>요소 객체 조작</a>");   //중요
+            $(".obj1").text("리스트_2");
+
+            $("#list3").append("<li>list_6</li>");  //중요
+            // 15. id="list3"인 요소에 마지막 위치에 새요소를 추가합니다.
+
+            $("#list3").prepend("<li>list_1</li>");
+            // 16. id="list3"인 요소에 첫 위치에 새요소를 추가합니다.
+
+            $("<li>insertBefore<li>").insertBefore($('#list3 li').eq(4));
+            // 17. id="list3"인 5번째 li요소 이전에 새요소를 추가합니다.
+            $("<li>insertAfter</li>").insertAfter($("#list3 li").eq(5));
+            // 18. id="list3"인 6번째 li요소 이후에 새요소를 추가합니다.
+
+            $(".obj1").clone().appendTo("#list3");//clone
+            // 19. class="obj1"인 요소를 복제후에 id="list3"인요소 마지막 위치에 추가
+            $("#list3 li").eq(0).remove();
+            // 20. id="list3"인 요소에 하위 <li>요소중 첫번째 요소 삭제
+
+            // ------------------------------------------------
+            $("#list3 li").eq(0).attr('class');
+            // 21. id="list3"인 요소에 하위 <li>요소중 첫번째 요소에 클래스 값을 반환 합니다.
+            $("#list3 li").eq(0).attr('class', 'obj2');
+
+            $('.obj2').css('background-color', 'yellow');
+
+            $('#list3 li').eq(0).addClass("obj3");
+            $(".obj3").css("color", "red");
+
+            // 위와 같은 코드
+            let firstListItem = list3.querySelector("li");
+            console.log(firstListItem.getAttribute('class'));
+
+            // 첫번째 li 요소에 클래스 이름을 설정하고 스타일 변경
+            firstListItem.setAttribute('class', 'obj2');
+            firstListItem.style.backgroundColor = 'yellow';
+            
+            // ------------------------------------------------
+            firstListItem.classList.add("obj3");
+            firstListItem.style.color = "red";
+
+            $('#list3 li').eq(0).addClass("obj3");
+            $(".obj3").css("color", "red");
+
+        });
+
+
+        // 위의 제이쿼리를 자바스크립트로 작성 ------------------------------------------------
+        document.addEventListener("DOMContentLoaded", function () {
+            // id가 list1인 요소에 li 요소 중 홀수 인덱스만 선택 후 배경 노란색
+            let list1OddItems = document.querySelectorAll("#list1 li:nth-child(odd)");
+            list1OddItems.forEach(function (item) {
+                item.style.background = "yellow";
+            });
+
+            // id가 list1인 요소에 li 요소 중 짝수 인덱스만 선택 후 배경 회색
+            let list1EvenItems = document.querySelectorAll("#list1 li:nth-child(even)");
+            list1EvenItems.forEach(function (item) {
+                item.style.background = "gray";
+            });
+
+            // id가 list1인 요소에 첫번째 li 요소만 선택 후 글자색 빨간색
+            document.querySelector("#list1 li:first-child").style.color = "red";
+
+            // id가 list1인 요소에 마지막 li 요소만 선택 후 글자색 초록색
+            document.querySelector("#list1 li:last-child").style.color = "green";
+
+            // id가 list1인 요소에 두번째 li 요소만 선택 후 이탤릭체로 변경
+            document.querySelectorAll("#list1 li")[1].style.fontStyle = "italic";
+
+            // id가 list1인 요소에 인덱스 2보다 작은 li 요소들에 테두리 점선 적용
+            let list1Lt2Items = document.querySelectorAll("#list1 li:nth-child(-n+2)");
+            list1Lt2Items.forEach(function (item) {
+                item.style.border = "2px dotted aqua";
+            });
+
+            // id가 list1인 요소에 인덱스 3보다 큰 li 요소들에 테두리 점선 적용
+            let list1Gt2Items = document.querySelectorAll("#list1 li:nth-child(n+4)");
+            list1Gt2Items.forEach(function (item) {
+                item.style.border = "2px dotted purple";
+            });
+
+            // id가 list2인 요소에 li 요소 중 2의 배수번째 li 요소 선택 후 배경색 오렌지
+            let list2Nth2nItems = document.querySelectorAll("#list2 li:nth-child(2n)");
+            list2Nth2nItems.forEach(function (item) {
+                item.style.background = "orange";
+            });
+
+            // li 중 '리스트11' 텍스트가 포함된 요소만 선택 후 글자색 빨간색
+            let list2ContainsTextItems = document.querySelectorAll("#list2 li");
+            list2ContainsTextItems.forEach(function (item) {
+                if (item.textContent.includes('리스트11')) {
+                    item.style.color = "red";
+                }
+            });
+
+            // id가 list2인 요소에 li 요소 중 span 태그를 포함한 li 요소 선택 후 글자색 aqua
+            let list2HasSpanItems = document.querySelectorAll("#list2 li span");
+            list2HasSpanItems.forEach(function (span) {
+                span.parentElement.style.color = "aqua";
+            });
+
+            // id가 list2인 요소에 li 요소 중 class가 theObj인 요소 선택 후 폰트 크기 20px
+            let list2ClassItems = document.querySelectorAll("#list2 li.theObj");
+            list2ClassItems.forEach(function (item) {
+                item.style.fontSize = "20px";
+            });
+
+            // id가 list2인 요소에 li 요소의 하위 a 요소만 선택 후 배경색 빨간색
+            let list2AnchorItems = document.querySelectorAll("#list2 li a");
+            list2AnchorItems.forEach(function (item) {
+                item.style.backgroundColor = "red";
+            });
+
+            // class가 theTitle인 요소의 HTML 내용 변경
+            document.querySelector(".theTitle").innerHTML = "<a href='#'>요소 객체 조작</a>";
+
+            // class가 obj1인 요소의 텍스트 내용 변경
+            document.querySelector(".obj1").textContent = "리스트_2";
+
+            // id가 list3인 요소에 마지막에 새 li 요소 추가
+            let list3 = document.querySelector("#list3");
+            let newListItem1 = document.createElement("li");
+            newListItem1.textContent = "list_6";
+            list3.appendChild(newListItem1);
+
+            // id가 list3인 요소에 첫번째에 새 li 요소 추가
+            let newListItem2 = document.createElement("li");
+            newListItem2.textContent = "list_1";
+            list3.insertBefore(newListItem2, list3.firstChild);
+
+            // id가 list3인 5번째 li 요소 이전에 새 요소 추가
+            let insertBeforeItem = document.createElement("li");
+            insertBeforeItem.textContent = "insertBefore";
+            let list3Items = document.querySelectorAll("#list3 li");
+            list3.insertBefore(insertBeforeItem, list3Items[4]);
+
+            // id가 list3인 6번째 li 요소 이후에 새 요소 추가
+            let insertAfterItem = document.createElement("li");
+            insertAfterItem.textContent = "insertAfter";
+            list3.insertBefore(insertAfterItem, list3Items[5].nextSibling);
+
+            // class가 obj1인 요소를 복제 후 id가 list3인 요소에 마지막 위치에 추가
+            let obj1Clone = document.querySelector(".obj1").cloneNode(true);
+            list3.appendChild(obj1Clone);
+
+            // id가 list3인 요소에 첫번째 li 요소 삭제
+            list3.removeChild(list3.firstChild);
+
+            // id가 list3인 요소의 첫번째 li 요소에 클래스 이름을 반환
+            let firstListItem = list3.querySelector("li");
+            console.log(firstListItem.getAttribute('class'));
+
+            // 첫번째 li 요소에 클래스 이름을 설정하고 스타일 변경
+            firstListItem.setAttribute('class', 'obj2');
+            firstListItem.style.backgroundColor = 'yellow';
+
+            // 첫번째 li 요소에 클래스 추가 후 스타일 변경
+            firstListItem.classList.add("obj3");
+            firstListItem.style.color = "red";
+        });
+
+    </script>
+
+</head>
+
+<body>
+    <div id="wrap">
+        <h1>탐색 선택자 및 html조작</h1>
+        <h2>탐색 선택자</h2>
+        <ul id="list1">
+            <li>리스트1</li>
+            <li>리스트2</li>
+            <li>리스트3</li>
+            <li>리스트4</li>
+            <li>리스트5</li>
+            <li>리스트6</li>
+            <li>리스트7</li>
+        </ul>
+        <ul id="list2">
+            <li>리스트8</li>
+            <li class="theObj">리스트9</li>
+            <li><span>리스트10</span></li>
+            <li>리스트11</li>
+            <li><a href="#">리스트12</a></li>
+            <li>리스트13</li>
+            <li>리스트14</li>
+        </ul>
+
+        <h2 class="theTitle">html 조작</h2>
+        <ul id="list3">
+            <li class="obj1">list_2</li>
+            <li>list_3</li>
+            <li>list_4</li>
+            <li>list_5</li>
+        </ul>
+    </div>
+</body>
+
+</html>

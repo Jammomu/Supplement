@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            border: none;
+            vertical-align: top;
+        }
+
+        li {
+            list-style: none;
+            float: left;
+            width: 80px;
+        }
+
+        /*img의 크기 72px - 여백(8px)*/
+
+        h1 {
+            text-align: center;
+        }
+
+        #banner_wrap {
+            width: 260px;
+            padding: 10px 20px;
+            margin: 0 auto;
+            border: 1px solid #aaa;
+        }
+
+        #banner {
+            width: 800px;
+            border: 1px solid red;
+            height: 54px;
+        }
+
+        #frame {
+            /* 3장 사진 */
+            width: 232px;
+            height: 54px;
+            position: relative;
+            margin: 10px auto;
+            border: 1px solid blue;
+            /* overflow: hidden; */
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <h1>롤링 슬라이드 배너 만들기</h1>
+    <div id="banner_wrap">
+        <div id="frame">
+            <ul id="banner">
+                <li><a href="#"><img src="images/pic_t1.jpg" alt="사진1"></a></li>
+                <li><a href="#"><img src="images/pic_t2.jpg" alt="사진1"></a></li>
+                <li><a href="#"><img src="images/pic_t3.jpg" alt="사진1"></a></li>
+                <li><a href="#"><img src="images/pic_t4.jpg" alt="사진1"></a></li>
+                <li><a href="#"><img src="images/pic_t5.jpg" alt="사진1"></a></li>
+
+            </ul>
+        </div>
+        <p>
+            <a href="#" class="prev">
+                <img src="images/prev_btn.png" alt="이전 버튼">
+            </a>
+            <a href="#" class="next">
+                <img src="images/next_btn.png" alt="다음 버튼">
+            </a>
+        </p>
+    </div>
+
+    <script> // roll_1.html의 스크립트를 자바스크립트로 쓴것
+      var list = document.getElementById('banner');
+      var listLi = document.querySelectorAll('#banner li');
+      var show_num = 3; //보이는 사진의 갯수
+      // var total = document.querySelectorAll("#banner > li").length;
+      var total = 5;
+      //alert(total);  초사진의 갯수   
+      var li_width = document.querySelector("#banner > li").offsetWidth;   
+      //alert(li_width); li크기 (이미지크기72 + 8) = 80
+      for(var i = 0; i < 3; i++){
+          var copyobj = listLi[i].cloneNode(true);
+          list.append(copyobj);
+      }
+      //복사한놈을  banner에 추가해라
+      //사진이 5장에서 8장으로 추가됨   
+      var num = 0;
+      document.querySelector('.next').addEventListener('click',function(e){
+          if (num === 5){
+              num = 0;
+              list.style.transition = 'none';
+              list.style.marginLeft = '0px';
+          }
+          setTimeout(function(){
+              num++;
+              list.style.transition = 'margin-left .5s';
+              list.style.marginLeft = -li_width * num + "px";
+              e.preventDefault();
+          },50);
+      });
+
+      document.querySelector('.prev').addEventListener('click',function(e){
+          if (num === 0){
+              num = 5;
+              list.style.transition = 'none';
+              list.style.marginLeft = -li_width * num + "px";
+          }
+          setTimeout(function(){
+              num--;
+              list.style.transition = 'margin-left .5s';
+              list.style.marginLeft = -li_width * num + "px";
+              e.preventDefault();
+          },50);
+      });
+
+
+      function autoplay(){
+          if (num === 5){
+                  num = 0;
+                  list.style.transition = 'none';
+                  list.style.marginLeft = '0px';
+          }
+          setTimeout(function(){
+              num++;
+              list.style.transition = 'margin-left .5s';
+              list.style.marginLeft = -li_width * num + "px";
+              e.preventDefault();
+          },50);
+      }
+      setInterval(autoplay, 3000);
+
+    </script>
+</body>
+
+</html>
