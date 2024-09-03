@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{margin: 0;padding: 0;}
+    #slider-container {
+      position: relative;
+      width: 100%;
+      max-width:795px;
+      margin: auto;
+      height:450px;
+    }
+    .slider {
+      width: 100%;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      top:0;
+      left:0;
+      /* opacity는 visibility와 함께 사용하는것이 좋다 */
+      visibility: hidden; 
+      opacity: 0;
+      width:100%;
+      transition: all 0.5s;
+    }
+    .slide.on{
+      visibility: visible;
+      opacity: 1;
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+    .pager{
+      position: absolute;
+      bottom: 20px;
+      left:20px;
+    }
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 8px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+      cursor: pointer;
+    }
+    .dot.active{background-color: red;}
+    .dot:hover {
+      background-color: #717171;
+    }
+    /* .slider div:nth-child(1){
+        visibility: visible;
+    } */
+    
+  </style>
+</head>
+<body>
+  <div id="slider-container">
+    <div class="slider">
+      <div class="slide fade on">
+        <img src="img/slide1.jpg" alt="Slide 1">
+      </div>
+      <div class="slide fade">
+        <img src="img/slide2.jpg" alt="Slide 2">
+      </div>
+      <div class="slide fade">
+        <img src="img/slide3.jpg" alt="Slide 3">
+      </div>
+    </div>
+
+    <div class="pager">
+      <span class="dot active" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+  </div>
+
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex); // slideIndex = 1
+
+    function currentSlide(n) { // n은 클릭한 것의 수
+      showSlides(slideIndex = n); // n = 2라면 slideIndex에 2를 대입한다.
+    }
+
+    function showSlides(n) {
+      let i;
+      const slides = document.getElementsByClassName('slide'); // 큰 사진들
+      const dots = document.getElementsByClassName('dot'); // 3개의 도트
+
+      if(n > slides.length) { // n이 3보다 크면 slideIndex를 1로 변경한다.
+        slideIndex = 1;
+      }
+
+      for(i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('on'); // 사진을 모두 숨긴다.
+      }
+
+      for(i = 0; i < dots.length; i++) {
+        dots[i].classList.remove('active'); // 도트색상을 기본색상으로 바꾼다.
+      }
+
+      slides[slideIndex-1].classList.add('on'); // 인덱스 번호를 맞추기 위해서 -1을 한다.
+      dots[slideIndex-1].classList.add('active');
+    }
+
+  </script>
+
+</body>
+</html>

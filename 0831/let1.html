@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function calcSum(n) {
+      let sum = 0;
+      for(let i = 1; i < n + 1; i++) {
+        sum += i;
+      }
+      sum = 100; // 재할당은 된다.
+      console.log(sum);
+      // let sum = 200; // 재선언은 안된다.
+    }
+    calcSum(10);
+    
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

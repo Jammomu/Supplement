@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    var greenArr = ["교대", "방배", "강남"];
+    var yellowArr = ["미금","정자","수서"];
+    greenArr.splice(2, 1, "서초", "역삼"); // 2번 인덱스 부터 1개의 데이터 삭제 후 "서초", "역삼" 삽입
+    console.log(greenArr);
+
+    var data1 = yellowArr.pop();
+    console.log(data1);
+    greenArr.push(data1);
+    console.log(greenArr);
+  </script>
+</body>
+</html>

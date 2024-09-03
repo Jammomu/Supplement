@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #wrap{position: fixed;}
+    body{height: 3000px;}
+  </style>
+
+  <script>
+    document.onmousemove = function(e) {
+      var x = e.clientX; // X좌표 구하기
+      var y = e.clientY; // Y좌표 구하기
+
+      document.getElementById('m1').innerHTML = x; // m1 안에 있는 값을 x값으로 바꾸겠다.
+      document.getElementById('m2').innerHTML = y;
+
+    }
+  </script>
+</head>
+<body>
+  <div id="wrap">
+    <h1 id="m1">0000</h1>
+    <h1 id="m2">0000</h1>
+  </div>
+</body>
+</html>

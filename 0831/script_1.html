@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      text-align: center;
+    }
+    #heading {
+      color: blue;
+    }
+    #text {
+      color: gray;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="heading">자바스크립트</h1>
+  <div id="text">위 텍스트를 클릭 해보세요</div>
+
+  <script>
+    var heading = document.querySelector('#heading');
+    // heading.onclick = function() {
+    //   heading.style.color = "red";
+    // }
+    
+    // heading.onclick = ()=> {
+    //   heading.style.color = "red";
+    // }
+    
+    heading.onclick = ()=> heading.style.color = "red";
+    
+  </script>
+</body>
+</html>

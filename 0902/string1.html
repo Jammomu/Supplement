@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       var t = "Hello Thank you good luck to you";
+        document.write(t.charAt(16), "<br>");
+        //인덱스 16에 저장된문자 'g'
+        document.write(t.indexOf("you"), "<br>"); //12
+        //찾는문자가 없을 때는 -1
+        document.write(t.indexOf("you", 16), "<br>");
+        //인덱스번호 16이후 에 발견된 인덱스값반환 29
+        document.write(t.lastIndexOf("you"), "<br>");//오른쪽부터 29
+        document.write(t.lastIndexOf("you", 25), "<br>");
+        //25부터 왼쪽방향으로  12
+        document.write(t.match("luck"), "<br>"); //luck 일치하는 문자 반환
+        document.write(t.search("you"), "<br>"); //12
+        document.write(t.substr(21, 4), "<br>"); // 중요!!! //인덱스 21부터 4글자
+        document.write(t.substring(6, 12), "<br>"); // 중요!!! //인덱스 6부터 12이전
+        document.write(t.replace("you","me"), "<br>"); // 중요!!! 
+        //왼쪽부터 제일먼저 발견된 you 를 me로 바꾼다.
+        document.write(t.toLowerCase(), "<br>");//소문자로
+        document.write(t.toUpperCase(), "<br>");//대문자로
+        document.write(t.length, "<br>"); //갯수
+        var s = t.split(" ");//split(" ") 을 기준으로 배열로 만듬
+        document.write(s[0], "<br>");
+	    document.write(s[4], "<br>");
+        //s[0] = Hello;
+        //s[1] = Thank
+
+        var str = "A";
+        var t = str.charCodeAt(0); //아스키코드 A의 값 65
+        document.write(t, "<br>");
+        document.write(String.fromCharCode(65), "<br>");
+        //코드값 65 문자로 변환하면 'A'
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+
+  <script>
+    $(function(){
+      
+    });
+
+  </script>
+
+
+  <style>
+    *{margin: 0;padding:0;}
+      ul,li{list-style: none;}
+      body{background-color: #333;}
+      img{border:0px;}  
+      #wrap{width:640px;margin:100px auto 0 auto;}
+      #nav li{float:left;}
+      #nav li a{
+      display: block; border:2px solid #bbb;
+      margin: 0 6px 10px 0; border-radius: 5px;
+    }
+    #nav li a img{display: block;width:70px;}
+    #window{clear:both;}
+    #nav li a.active{border:2px solid #fff;}
+
+  </style>
+
+</head>
+<body>
+  <div id='wrap'>
+    <ul id="nav">
+      <li><a href="img/lop0.jpg" class="active"><img src="img/thumb0.jpg" alt="그림0"></a></li>
+      <li><a href="img/lop1.jpg"><img src="img/thumb1.jpg" alt="그림1"></a></li>
+      <li><a href="img/lop2.jpg"><img src="img/thumb2.jpg" alt="그림2"></a></li>
+      <li><a href="img/lop3.jpg"><img src="img/thumb3.jpg" alt="그림3"></a></li>
+      <li><a href="img/lop4.jpg"><img src="img/thumb4.jpg" alt="그림4"></a></li>
+      <li><a href="img/lop5.jpg"><img src="img/thumb5.jpg" alt="그림5"></a></li>
+      <li><a href="img/lop6.jpg"><img src="img/thumb6.jpg" alt="그림6"></a></li>
+      <li><a href="img/lop7.jpg"><img src="img/thumb7.jpg" alt="그림7"></a></li>
+    </ul>
+    <div id="window"><img src="img/lop0.jpg"/></div>
+  </div>
+
+  <script>
+    // Javascript 문법
+    const links = document.querySelectorAll('#nav li a'); // 모두 등록할 때 querySelectorAll
+    const displayImg = document.querySelector('#window img'); // 등록한것 중 하나를 선택했을 때
+    links.forEach(link => {
+      link.addEventListener('click', function(event) {
+        event.preventDefault(); // 기본 링크 기능 막기 a링크가 있으면 무조건 써줘야함
+
+        // href에 있는 주소를 읽어옴
+        const imgUrl = this.getAttribute('href'); // getAttribute는 '='으로 돼있는것은 모두 읽는다.
+        // alert(imgUrl);
+        displayImg.setAttribute('src', imgUrl); // 괄호 안의 오른쪽 내용을 왼쪽에 대입해라
+
+        // 모든 링크에서 'active' 클래스를 제거
+        links.forEach(link => link.classList.remove('active'));
+
+        // 클릭된 링크에 'active' 클래스 추가
+        this.classList.add('active');
+
+      });
+    });
+
+  </script>
+</body>
+</html>

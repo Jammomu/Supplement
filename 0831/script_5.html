@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: lightcoral;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <button id="resizeButton">박스 크기 변경</button>
+
+  <script>
+    let rBtn = document.querySelector("#resizeButton");
+    let box = document.querySelector("#box");
+
+    rBtn.addEventListener('click', function(){
+      box.style.width = '200px';
+      box.style.height = '200px';
+    });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .highlight {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <div id="text">이 텍스트를 클릭하면 추가 되거나 제거 됩니다.</div>
+  <button id="toggleButton">클래스 토글</button>
+
+  <script>
+    let tBtn = document.querySelector("#toggleButton");
+    let text = document.querySelector("#text");
+
+    tBtn.addEventListener("click", function() {
+      if(text.classList.contains('highlight')) { // text에 highlight라는 클래스명이 포함 돼있으면
+        text.classList.remove('highlight'); // highlight라는 클래스를 삭제한다.
+      } else {
+        text.classList.add('highlight'); // text에 highlight라는 클래스명이 없으면 highlight라는 클래스를 삽입한다.
+      }
+    });
+  </script>
+</body>
+</html>

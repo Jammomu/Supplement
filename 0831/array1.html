@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    var arr = [30, "따르릉", true];
+
+    // 배열값 가져오기
+    document.write("<h3>배열값 가져오기-1</h3>");
+    document.write(arr[0], "<br>");
+    document.write(arr[1], "<br>");
+    document.write(arr[2], "<br>");
+
+    // 배열값 반복문으로 가져오기1
+    document.write("<h3>배열값 가져오기-2</h3>");
+    for(var i = 0; i < arr.length; i++) {
+      document.write(arr[i], "<br>");
+    }
+
+    // 배열값 반복문으로 가져오기2
+    document.write("<h3>배열값 가져오기-3</h3>");
+    for(i in arr){
+      document.write(arr[i], "<br>");
+    }
+    
+    // 배열값 forEach문으로 가져오기
+    document.write("<h3>배열값 가져오기-4</h3>");
+    arr.forEach(function(element) {
+      document.write(element, "<br>");
+    });
+
+    // 배열값 forEach문으로 가져오기 - 함축형
+    document.write("<h3>배열값 가져오기-5</h3>");
+    arr.forEach(element => {
+      document.write(element, "<br>");
+    });
+
+    </script>
+</head>
+<body>
+  
+</body>
+</html>
