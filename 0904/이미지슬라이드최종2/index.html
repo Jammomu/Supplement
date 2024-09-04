@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		ul,
+		li {
+			list-style: none;
+		}
+
+		a {
+			text-decoration: none;
+			color: #000;
+		}
+
+		.cf:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+
+		#img_slide {
+			width: 800px;
+			height: 450px;
+			margin: 50px auto;
+			position: relative;
+
+		}
+
+		#img_slide .imgs {
+			width: 100%;
+			height: 100%;
+			position: relative;
+			overflow: hidden;
+		}
+
+		#img_slide .imgs li {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			left: 100%;
+			top: 0;
+		}
+
+		#img_slide .imgs li:first-child {
+			left: 0;
+		}
+
+		#img_slide .imgs li img {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+
+
+		.pager {
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			bottom: -30px;
+		}
+
+		.pager li {
+			float: left;
+			margin: 0 7px;
+		}
+
+		.pager li a {
+			display: block;
+			width: 15px;
+			height: 15px;
+			background-color: #ddd;
+			border-radius: 50%;
+		}
+
+		.pager li.on a {
+			background-color: #555;
+		}
+
+		#img_slide .btn {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			color: #999;
+			font-size: 80px;
+		}
+
+		#img_slide .btn.next {
+			right: -80px;
+		}
+
+		#img_slide .btn.prev {
+			left: -80px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="img_slide">
+		<ul class="imgs">
+			<li><img src="./images/photo1.JPG" alt="" /></li>
+			<li><img src="./images/photo2.JPG" alt="" /></li>
+			<li><img src="./images/photo3.JPG" alt="" /></li>
+			<li><img src="./images/photo4.JPG" alt="" /></li>
+			<li><img src="./images/photo5.JPG" alt="" /></li>
+		</ul>
+		<ol class="pager">
+			<li class="on"><a href="#"></a></li>
+			<li><a href="#"></a></li>
+			<li><a href="#"></a></li>
+			<li><a href="#"></a></li>
+			<li><a href="#"></a></li>
+		</ol>
+		<p class="btn next">&gt;</p>
+		<p class="btn prev">&lt;</p>
+	</div>
+	<script>
+		$(function () {
+			var i = 0;  //클릭한 인덱스 인덱스번호
+			var k = 0;  //현재 인덱스 번호
+			var repeat; //자동 슬라이드 관리 변수명
+
+			$(".pager li").on("click", click_slide);
+			//.pager li의 클릭기능을 켬. 그때 실행되는 함수의 이름은 click_slide()
+			function click_slide() {
+				//실행함수 이름 지정 {}안쪽이 실행되는 내용들
+				$(".pager li").off("click");
+				//실행이 중복되지 않도록 클릭기능을 끔.
+				i = $(this).index();
+				//전역변수 i에 클릭한 li의 인덱스 번호를 저장함.
+				if (i > k) {
+					//변수 i에 저장된 수와 k에 저장된 수를 비교한다. 그 때 i가 k보다 클 경우 아래 내용을 실행함.
+					$(".imgs li").eq(i).css("left", "100%").animate({
+						"left": 0
+					}, 600);
+					//.eq(i)해당하는 이미지가 화면안으로 들어온다.
+					$(".imgs li").eq(k).css("left", "0").animate({
+						"left": "-100%"
+					}, 600, function () {
+						$(".pager li").on("click", click_slide);
+					});
+					//.eq(k)해당하는 이미지가 화면밖으로 나간다. 
+					//오른쪽에서 왼쪽으로 들어오고 나간다.
+				} else if (i < k) {
+					//변수 i에 저장된 값이 k에 저장된 값보다 작을 경우 아래 내용을 실행함.
+					$(".imgs li").eq(i).css("left", "-100%").animate({
+						"left": 0
+					}, 600);
+					//.eq(i)에 해당하는 이미지는 왼쪽 밖에서 화면안으로 들어온다.
+					$(".imgs li").eq(k).css("left", "0").animate({
+						"left": "100%"
+					}, 600, function () {
+						$(".pager li").on("click", click_slide);
+						//animate가 끝난 뒤에 callback실행으로 .pager li를 클릭할 수 있도록 클릭 기능을 다시 실행시킨다.
+					});
+					//.eq(k)에 해당하는 이미지는 화면에서부터 오른쪽 바깥으로 나간다. 
+				} else {
+					//i==k
+					$(".pager li").on("click", click_slide);
+					//i에 저장된 값과 k에 저장된 값이 같을 경우 .pager li의 클릭기능을 아무런 실행 없이 다시 켜준다.
+				}
+
+				$(".pager li").removeClass("on").eq(i).addClass("on");
+
+				k = i;
+				//다음 실행때 이전에 선택되어 화면 안으로 들어온 이미지를 다시 나갈수 있도록 선택해줄 수 있는 내용.
+			}
+
+
+			timer();
+			//timer라는 실행함수를 실제로 실행시킴.
+
+			function timer() {
+				//timer라는 실행함수를 지정함.
+				repeat = setInterval(function () {
+					//setInterval 자동적으로 반복적으로 어떠한 내용을 실행시킴.
+					i++;
+					//i값에 3초에 한번씩 1씩 증가.
+					if (i == 5) {
+						i = 0;
+					}
+					//i값이 5와 같은 숫자가 된다면 i값을 0으로 지정함. 
+					$(".imgs li").eq(i).css("left", "100%").animate({
+						"left": 0
+					}, 600);
+					$(".imgs li").eq(i - 1).css("left", "0%").animate({
+						"left": "-100%"
+					}, 600);
+
+					$(".pager li").removeClass("on").eq(i).addClass("on");
+
+					k = i;
+				}, 3000);
+				//setInterval이 몇초에 한번씩 실행되는지를 지정.
+			}
+
+			$(".pager li").mouseover(function () {
+				clearInterval(repeat);
+				//.pager li에 마우스를 올렸을 때 setInterval기능을 끔.
+			});
+			$(".pager li").mouseleave(function () {
+				timer();
+				//.pager li에 마우스를 뗐을 때 setInterval이 지정되어있는 timer실행함수를 다시 실행시킴.
+			});
+
+			$(".next").on("click", next_slide);
+			$(".prev").on("click", prev_slide);
+
+			function next_slide() {
+				$(".next").off("click");
+				$(document).off("keydown");
+				clearInterval(repeat);
+
+				i++;
+				if (i == 5) {
+					i = 0;
+				}
+
+				$(".imgs li").eq(i).css("left", "100%").animate({
+					"left": 0
+				}, 600);
+				$(".imgs li").eq(i - 1).css("left", "0%").animate({
+					"left": "-100%"
+				}, 600, function () {
+					$(".next").on("click", next_slide);
+					$(document).on("keydown", pressKey);
+					timer();
+				});
+
+				$(".pager li").removeClass("on").eq(i).addClass("on");
+
+				k = i;
+			}
+			function prev_slide() {
+				$(".prev").off("click");
+				$(document).off("keydown");
+				clearInterval(repeat);
+				i--;
+
+				$(".imgs li").eq(i).css("left", "-100%").animate({
+					"left": 0
+				}, 600);
+				$(".imgs li").eq(i + 1).css("left", "0%").animate({
+					"left": "100%"
+				}, 600, function () {
+					$(".prev").on("click", prev_slide);
+					$(document).on("keydown", pressKey);
+					timer();
+				});
+
+				if (i == -1) {
+					i = 4;
+				}
+				$(".pager li").removeClass("on").eq(i).addClass("on");
+				k = i;
+			}
+
+			$(document).on("keydown", pressKey);
+			//키보드의 키를 눌렀을 때 pressKey 실행함수를 실행한다.
+			function pressKey(e) {
+				//pressKey함수 내용 (e라는 값에 키보드의 정보를 전부 저장함.)
+				if (e.keyCode == 65 || e.keyCode == 37) {
+					//A || 왼쪽 화살표 키를 눌렀을 때
+					prev_slide();
+				} else if (e.keyCode == 68 || e.keyCode == 39) {
+					//D || 오른쪽 화살표 키를 눌렀을 때
+					next_slide();
+				}
+			}
+		});
+
+	</script>
+
+
+</body>
+
+</html>
