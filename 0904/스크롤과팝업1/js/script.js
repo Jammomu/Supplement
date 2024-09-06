@@ -82,4 +82,45 @@ $(function(){
 
     $('html, body').stop().animate({scrollTop : offset_div}, 1000);
   });
+
+  // $("section > div").mousewheel(function(event, d){
+  //   console.log(d);
+  //   if(d > 0){
+  //     let prev = $(this).prev().offset().top;
+  //     $('html, body').stop().animate({scrollTop : prev}, 1000);
+  //   }
+  //   if(d < 0){
+  //     let next = $(this).next().offset().top;
+  //     $('html, body').stop().animate({scrollTop : next}, 1000);
+  //   }
+
+  // });
+
+  // jquery-ui.js 지원하는 플러그인
+  $('#popup').draggable();
+  // 기본적으로 처음에는 $.cookie('pop') 에 no가 없으므로
+  // '#popup'을 보여준다.
+  if($.cookie('pop') != "no"){
+    $('#popup').show();
+  }
+  $('#popup area:eq(0)').click(function(){
+    $("#popup").fadeOut('fast'); // 서서히 없어져라
+  });
+  $('#popup area:eq(1)').click(function(){
+    $.cookie('pop', 'no', {expires : 1}); // 하루 동안 닫기
+    $("#popup").fadeOut('fast');
+  });
+
+  if($.cookie('popup') == 'none'){
+    $('#notice_wrap').hide();
+  }
+  let chk = $('#expiresChk'); // checkbox
+  $('.closeBtn').on('click', closePop);
+  function closePop(){
+    if(chk.is(":checked")){ // input 창이 checked가 되어있으면
+      $.cookie('popup', 'none', {expires : 3});
+    }
+    $('#notice_wrap').fadeOut("fast");
+  }
+
 });

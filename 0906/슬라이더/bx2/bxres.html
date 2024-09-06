@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 크롬에서 bxslider 검색 -->
+    <!-- menu - github 에 가서 code 클릭 download -->
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/jquery.bxslider.js"></script>
+    <!-- cdn 방법 - 플러그인을 웹주소로 연결 -->
+    <style>
+        *{margin: 0;padding: 0;}
+        header{
+            width: 100%;
+            max-width: 960px;
+            height:200px;
+            margin: 0 auto;
+            background-color: pink;
+        }
+        section{
+            width: 100%;
+            max-width: 960px;
+            height:800px;
+            margin: 0 auto;
+            border: 1px solid red;
+        }
+        
+          </style>
+    <script>
+        $(function(){
+            $('.bx2').bxSlider({
+                auto:true,
+                
+                
+            });
+            
+        });
+      </script>
+</head>
+<body>
+    <header>헤더</header>
+    <section>
+        <ul class="bx2">
+            <li><img src="img/images(1).jpg" alt="사진1" title="메인사진1 <br/> 두줄이당"></li>
+            <li><img src="img/images(2).jpg" alt="사진2" title="메인사진2"></li>
+            <li><img src="img/images(3).jpg" alt="사진3" title="메인사진3"></li>
+            <li><img src="img/images(4).jpg" alt="사진3" title="메인사진4"></li>
+            <li><img src="img/images(5).jpg" alt="사진3" title="메인사진5"></li>
+        </ul>
+    </section>
+</body>
+</html>
