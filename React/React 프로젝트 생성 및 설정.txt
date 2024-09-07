@@ -1,0 +1,16 @@
+vite 설치
+ESLint 설치
+
+
+npm create vite@latest
+
+project1 > react > javascript 선택
+
+npm i
+( == npm install)
+
+npm run dev
+
+eslint.config.js에 rules: { 안에 입력
+"no-unused-vars":"off",
+"react/prop-types":"off"

@@ -1,0 +1,13 @@
+폰트어썸 주소
+ <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+구글에서  fontawesome 4.7검색
+Get started 다운로드
+본인에 폴더로 복사
+<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css"> 
+연결
+icons 필요한 아이콘을 클릭하여
+body 안에 복사 붙여넣기 
+<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+

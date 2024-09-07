@@ -1,0 +1,58 @@
+날씨API 사이트
+https://openweathermap.org
+
+날씨 아이콘 주소
+https://openweathermap.org/weather-conditions
+
+API key
+de4e54e6aebcb139272344b49c1c79c0
+
+
+Example on how to make an API call using your API key
+API call
+http://api.openweathermap.org/data/2.5/forecast?id=524901&appid={API key}
+
+http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=de4e54e6aebcb139272344b49c1c79c0
+
+
+id=524901 이 숫자는 도시코드 입니다.
+
+적용시키려면 도시코드를 얻어와야함.
+
+검색란에
+suwon 입력
+
+수원 클릭하면
+URL 주소 란에 1835553을 복사 - 수원의 도시코드
+
+서울의 도시코드 -1835848
+
+
+http://api.openweathermap.org/data/2.5/forecast?id=1835553&appid=de4e54e6aebcb139272344b49c1c79c0
+id=도시코드를 수원도시코드로 변경
+
+출력되어서 나온 온도는 kelvin 온도 입니다.
+
+메뉴  - api - Parameters of API reponse – json - Units of measurement
+찾기 ctrl + f (Units of measurement)검색
+
+기본 kelvin
+&units=metric 뒤에 붙인다. (섭씨)
+&units=imperial(화씨)
+
+http://api.openweathermap.org/data/2.5/forecast?id=1835553&appid=de4e54e6aebcb139272344b49c1c79c0&units=metric
+
+
+forecast(예보) : 3시간 단위로 예보
+
+
+weather(현재날씨)
+
+
+http://api.openweathermap.org/data/2.5/weather?id=1835553&appid=de4e54e6aebcb139272344b49c1c79c0&units=metric
+
+
+
+
+
+

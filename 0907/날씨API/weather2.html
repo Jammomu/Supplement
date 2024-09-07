@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+
+  <script>
+    // $.getJSON("demo_ajax_json.js", function(result){
+    //   $.each(result, function(i, field){
+    //     $("div").append(field + " ");
+    //   });
+    // });
+
+    // $.getJSON("날씨(파일)경로", function(data){
+    //   data 할일;
+    // });
+    
+    $.getJSON("http://api.openweathermap.org/data/2.5/weather?id=1835553&appid=de4e54e6aebcb139272344b49c1c79c0&units=metric", function(data){
+      // forecast 예보를 weather로
+      // 현재 온도
+      // 현재 최저 온도
+      // 현재 최고 온도
+      // 현재 아이콘
+
+      let $cTemp = data.main.temp; // 새벽 3시 온도
+      let $maxTemp = data.main.temp_max;
+      let $minTemp = data.main.temp_min;
+      // let $cDate = data.list[0].dt_txt; // 날짜-시간
+      let $wIcon = data.weather[0].icon;
+      // alert($wIcon);
+      // https://openweathermap.org/img/wn/10d@2x.png
+      $('.ctemp').append($cTemp);
+      $('.clowtemp').append($minTemp);
+      $('.chightemp').append($maxTemp);
+      // $('h2').prepend($cDate); // h2 현재 글씨 앞으로 날찌 시간 삽입
+      // $('.cicon').append('<img src="https://openweathermap.org/img/wn/'+$wIcon+'@2x.png" >');
+      $('.cicon').append(`<img src="https://openweathermap.org/img/wn/${$wIcon}@2x.png" >`);
+
+      let $now = new Date();
+      // let $cDate = $now.getFullYear() + " / " + ($now.getMonth() + 1) + " / " + $now.getDate() + " " + $now.getHours() + " : " + $now.getMinutes();
+      // let $cDate = new Date().toLocalDateString();
+      var $cDate = new Date().toLocaleString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+      $('h2').prepend($cDate);
+    });
+  </script>
+
+</head>
+<body>
+  <h1>weather api</h1>
+  <h2> - 날씨예보</h2>
+  <div class="ctemp">현재 온도: </div>
+  <div class="clowtemp">최저 온도: </div>
+  <div class="chightemp">최고 온도: </div>
+  <div class="cicon">아이콘 :</div>
+  <!-- <img src="https://openweathermap.org/img/wn/10d@2x.png" alt=""> -->
+  
+</body>
+</html>

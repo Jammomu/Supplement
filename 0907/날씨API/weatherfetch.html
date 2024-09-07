@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" integrity="sha384-vuFJ2JiSdUpXLKGK+tDteQZBqNlMwAjhZ3TvPaDfN9QmbPb7Q8qUpbSNapQev3YF" crossorigin="anonymous"></script>
+<style>
+    .weather{
+      width:300px;
+      height:150px;
+      text-align: center;
+      background-color:cornflowerblue;
+      color: #fff;
+    }
+    .weather > div{
+      float: left;
+      height: 75px;
+      line-height: 75px;
+      width: 50%;
+    }
+    .weather > div.currIcon, .weather > div.currTemp{
+      font-size: 50px;
+    }
+    .weather > div.city{
+      width:100%;
+      font-size:23px;
+    }
+
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const weatherIcon = {
+        '01' : 'fas fa-sun',
+        '02' : 'fas fa-cloud-sun', 
+        '03' : 'fas fa-cloud', 
+        '04' : 'fas fa-cloud-meatball', 
+        '09' : 'fas fa-cloud-sun-rain',
+        '10' : 'fas fa-cloud-showers-heavy', 
+        '11' : 'fas fa-poo-storm', 
+        '13' : 'fas fa-snowflake', 
+        '50' : 'fas fa-smog'
+    }
+
+    const apiURI = "http://api.openweathermap.org/data/2.5/weather?id=1897007&appid=2c14f02fa56b8ef81940b083f5fceecf&&units=metric";
+
+    fetch(apiURI)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const iconCode = data.weather[0].icon.substr(0, 2);
+            const temp = Math.floor(data.main.temp) + '˚';
+            const city = data.name;
+
+            document.querySelector('.currIcon').innerHTML = '<i class="'+weatherIcon[iconCode]+'"></i>';
+            document.querySelector('.currTemp').textContent = temp;
+            document.querySelector('.city').textContent = city;
+        })
+        .catch(error => console.error('Fetch error:', error));
+});
+</script>
+</head>
+<body>
+    <div class="weather">
+        <div class="currIcon"></div>
+        <div class="currTemp"></div>
+        <div class="city"></div>
+    </div>
+</body>
+</html>
